@@ -1,8 +1,10 @@
 import time
 from enum import Enum
 
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions
+from selenium.common.exceptions import TimeoutException
 from appium import webdriver
 from appium.options.android import UiAutomator2Options
 from appium.webdriver.common.appiumby import AppiumBy
@@ -29,8 +31,8 @@ class I(webdriver.Remote):
          .until(expected_conditions.presence_of_element_located((AppiumBy.ID, id_string)))
          .click())
 
-    def click_by_accessibility(self, accessibility_id_string):
-        with_wait = WebDriverWait(self, 10)
+    def click_by_accessibility(self, accessibility_id_string, wait=10):
+        with_wait = WebDriverWait(self, wait)
         (with_wait
          .until(expected_conditions.presence_of_element_located((AppiumBy.ACCESSIBILITY_ID, accessibility_id_string)))
          .click())
@@ -40,6 +42,23 @@ class I(webdriver.Remote):
         (with_wait
          .until(expected_conditions.presence_of_element_located((AppiumBy.XPATH, f"//*[@text='{text}']")))
          .click())
+
+    def click_xpath(self, x):
+        with_wait = WebDriverWait(self, 10)
+        (with_wait
+         .until(expected_conditions.presence_of_element_located((AppiumBy.XPATH, x)))
+         .click())
+
+    def click_xpath_or(self, x, els):
+        with_wait = WebDriverWait(self, 5)
+        try:
+            (with_wait
+             .until(expected_conditions.presence_of_element_located((AppiumBy.XPATH, x)))
+             .click())
+        except TimeoutException:
+            (with_wait
+             .until(expected_conditions.presence_of_element_located((AppiumBy.XPATH, els)))
+             .click())
 
     def fill_placeholder(self, placeholder, string):
         with_wait = WebDriverWait(self, 10)
@@ -61,3 +80,6 @@ class I(webdriver.Remote):
         assert with_wait \
             .until(expected_conditions.presence_of_element_located((AppiumBy.XPATH, f"//*[@{attr.value}='{string}']"))) \
             .is_displayed()
+
+    def assert_content_displayed(self, string):
+        self.assert_displayed(string, Attr.CONTENT_DESC)
