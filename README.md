@@ -5,7 +5,7 @@ best-of-appium "boppium" is [appium/python-client](https://github.com/appium/pyt
 ## Example config files
 ### pytest
 ```python
-# text/conftest.py
+# test/conftest.py
 import pytest
 
 import os, sys
@@ -83,4 +83,4 @@ def test_launch_logout(android_driver_fn):
 ```
 
 Acknowledgments
-- [](https://stackoverflow.com/a/72437511/6524122)
+- https://stackoverflow.com/a/72437511

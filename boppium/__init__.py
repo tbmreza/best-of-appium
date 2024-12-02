@@ -50,7 +50,7 @@ class I(webdriver.Remote):
          .click())
 
     def click_xpath_or(self, x, els):
-        with_wait = WebDriverWait(self, 5)
+        with_wait = WebDriverWait(self, 10)
         try:
             (with_wait
              .until(expected_conditions.presence_of_element_located((AppiumBy.XPATH, x)))
@@ -81,5 +81,28 @@ class I(webdriver.Remote):
             .until(expected_conditions.presence_of_element_located((AppiumBy.XPATH, f"//*[@{attr.value}='{string}']"))) \
             .is_displayed()
 
+    def xpath_is_displayed(self, x):
+        with_wait = WebDriverWait(self, 1)
+        try:
+            with_wait \
+                .until(expected_conditions.presence_of_element_located((AppiumBy.XPATH, x))) \
+                .is_displayed()
+            return True
+        except TimeoutException:
+            return False
+
     def assert_content_displayed(self, string):
         self.assert_displayed(string, Attr.CONTENT_DESC)
+
+    def scroll_until(self, x):
+        """Horizontally unchanged, swipe vertically from a lower height to higher."""
+        res = (2900, 6000)  # ??: get resolution from runtime
+        y_lower = res[1] / 5
+        y_higher = res[1] / 7
+
+        self.swipe(1, y_lower, 1, y_higher)
+        while True:
+            if self.xpath_is_displayed(x):
+                break
+            else:
+                self.swipe(1, y_lower, 1, y_higher)
