@@ -1,0 +1,32 @@
+Enhancement:
+  title: "^feat:.*"
+
+BugFix:
+  title: "^fix:.*"
+
+Documentation:
+  title: "^docs:.*"
+
+Build:
+  title: "^build:.*"
+
+CI:
+  title: "^ci:.*"
+
+Test:
+  title: "^test:.*"
+
+Chore:
+  title: "^chore:.*"
+
+GitHub:
+  title: "^github:.*"
+
+WIP:
+  title: "^WIP:.*"
+  mergeable: false
+
+BreakingChange:
+  title: "^.*BREAKING CHANGE:.*|.*!.*"
+  mergeable: false
+  

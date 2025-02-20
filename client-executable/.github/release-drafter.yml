@@ -1,0 +1,52 @@
+name-template: 'v$RESOLVED_VERSION'
+tag-template: 'v$RESOLVED_VERSION'
+template: |
+  # What's Changed
+
+  $CHANGES
+
+  ## 🚀  Contributors
+  Thanks to the following contributors in this release: 
+  $CONTRIBUTORS
+  
+categories:
+  - title: '✨ Enhancements'
+    label: 'Enhancement'
+  - title: '🐛 Bug Fixes'
+    labels:
+      - 'BugFix'
+  - title: '🔄 Refactor'
+    label: 'Refactor'
+  - title: '📦 Dependencies'
+    labels:
+      - 'Dependencies'
+  - title: '🛠️ Pipeline'
+    labels:
+      - 'CI'
+      - 'Build'
+  - title: '🧰 Maintenance'
+    label: 'Chore'  
+  - title: '🧪 Tests'
+    label:
+      - 'Test'
+  - title: '📚 Documentation'
+    labels:
+      - 'Documentation'
+
+version-resolver:
+  major:
+    labels:
+      - 'BreakingChange'
+  minor:
+    labels:
+      - 'Enhancement'
+  patch:
+    labels:
+      - 'BugFix'
+      - 'Dependencies'
+      - 'Hotfixes'
+  default: patch
+  
+prerelease: false
+prerelease-identifier: 'rc'
+contribution-template: '- $NAME contributed via $PULL_REQUEST'

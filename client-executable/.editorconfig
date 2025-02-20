@@ -1,0 +1,12 @@
+root = true
+
+[lib/**.js]
+indent_style = space
+indent_size = 4
+
+[*.cs]
+indent_style = space
+indent_size = 4
+
+# Set up additional disposal methods for a specific diagnostic rule
+dotnet_diagnostic.NUnit1032.additional_dispose_methods = Quit
