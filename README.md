@@ -2,6 +2,16 @@
 
 best-of-appium "boppium" is [appium/python-client](https://github.com/appium/python-client) application code that has worked for me, for your reference.
 
+## Execution report
+
+A report of an execution captures:
+1. What is controlled by appium (emulator specs metadata or real device connection configs)
+2. Appium client code release tag
+3. Test suite results
+
+### Emulator
+?? android studio export
+
 ## Example config files
 ### pytest
 ```python
@@ -48,6 +58,15 @@ networkingMode=mirrored
 [experimental]
 hostAddressLoopback=true
 ```
+
+### Native Windows notes
+
+These conservative strategies might save you time down the road.
+- Use current, non-preview, non-legacy version of PowerShell.
+- Do whatever is recommended in Microsoft's documentation on setting up Node.js https://learn.microsoft.com/en-us/windows/dev-environment/javascript/nodejs-on-windows.
+- For appium client, use whatever's most recently updated by the appium team. At the time of writing it's dotnet.
+    - Non-preview version of Visual Studio is as safe as it can get for programming dotnet scripts https://learn.microsoft.com/en-us/dotnet/core/install/windows#install-with-visual-studio.
+- Use windows runner in Github Actions.  
 
 ## Usage
 
